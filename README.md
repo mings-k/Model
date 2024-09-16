@@ -1,4 +1,4 @@
-* Model Study RECORD
+Model Study RECORD
 
 - LPIENet (Lightweight network for Perceptual Image Enhancement)
 
