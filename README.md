@@ -5,3 +5,5 @@ Model Study RECORD
 - Visual Prompt Tuning (VPT) 
 
 - Visual Transformer (ViT)
+
+- HQ-SAM (Segment Anything in High Quality) ~ing
