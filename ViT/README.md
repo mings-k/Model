@@ -18,7 +18,7 @@
 - MLP를 거친 후 MLP의 입력값을 다시 한번 skip-connection을 통해 더해주며 마무리함
 - 위 과정을 식으로 나타내면 아래 사진과 같음
 
-![alt text](ViT/README_Image/image-1.png)
+![alt text](README_Image/image-1.png)
 
 위 과정을 L번 반복하며 학습을 진행함
 
