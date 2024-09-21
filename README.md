@@ -1,9 +1,9 @@
-Model Study RECORD
+# Model Study RECORD
 
 - LPIENet (Lightweight network for Perceptual Image Enhancement)
 
-- Visual Prompt Tuning (VPT) 
-
 - Visual Transformer (ViT)
+
+- Visual Prompt Tuning (VPT) 
 
 - HQ-SAM (Segment Anything in High Quality) ~ing
