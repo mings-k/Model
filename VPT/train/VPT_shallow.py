@@ -12,9 +12,10 @@ from torch.utils.data import DataLoader
 import numpy as np
 
 import sys
-sys.path.append('C:/Users/islab/Desktop/MinseungDB/model_study/VPT/')
-from model.vpt_vit import Vpt_ViT
+import os
 
+sys.path.append('C:/Users/islab/Desktop/MinseungDB/model_study/model/VPT')
+from model.vpt_vit import Vpt_ViT
 from timm.models.layers import trunc_normal_
 import matplotlib.pyplot as plt
 import os
@@ -56,8 +57,7 @@ def train(model, train_loader, test_loader, criterion, optimizer, total_epochs, 
     scheduler = CosineAnnealingWarmupRestarts(optimizer, first_cycle_steps= 100, cycle_mult=1, max_lr= lr, min_lr= 0.0001, warmup_steps= 1, gamma= 0.5)
 
     best_acc = 0
-    best_model_wts = copy.deepcopy(model.state_dict()) # deepcopy를 사용하여 완전히 독립된 학습 파일 생성
-    
+        
     model.to(device)
     for epoch in range(total_epochs):
         model.train()
@@ -155,7 +155,8 @@ if __name__ == '__main__':
     # model 
     model = Vpt_ViT(pretrained_model='vit_base_patch16_224', img_size=32, patch_size=4, num_classes=10) # CiFAR-10 dataset
     model = model.to(device=device)
-
+   
+    
     # untrainable (input 부분 이외는 freeze하기에 VPT_shallow임)
     for name, param in model.named_parameters():
         if 'blocks' in name:

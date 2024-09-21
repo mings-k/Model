@@ -20,6 +20,6 @@
 
 ![alt text](README_Image/image-1.png)
 
-위 과정을 L번 반복하며 학습을 진행함
+위 과정을 L번 반복하며 학습을 진행함 (prac.ipynb 파일에서 depth에 해당)
 
 - ViT 모델은 적은 데이터셋에서는 CNN에 비해 낮은 성능을 보이나 데이터셋이 많아질 경우 더 높은 성능을 보임

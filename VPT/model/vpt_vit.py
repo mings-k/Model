@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.init as init
 import timm
+import sys
 
 class PromptInput(nn.Module):
     def __init__(self, num_prompts, embed_dim = 768, num_layers = 12):
@@ -24,7 +25,7 @@ class PromptInput(nn.Module):
             x = torch.cat((x[:, :1, :], prompt_tokens, x[:,1:,:]), dim = 1) # => [batch_size, cls_token + prompt_tokens + seq_len, embed_dim]
 
         else:
-            x = torch.cat((x[:, :1, :], prompt_tokens, x[:, (1+self.num_prompts):, :]), dim=1)
+            x = torch.cat((x[:, :1, :], prompt_tokens, x[:, (1+self.num_prompts):, :]), dim=1) # 이미 추가된 prompt를 제외한 나머지 추가
 
         return x 
     
@@ -40,6 +41,7 @@ class Vpt_ViT(nn.Module):
         self.model = timm.create_model(pretrained_model, pretrained = True, img_size = img_size, patch_size = patch_size, num_classes = num_classes)
     
     def forward(self, x):
+        sys.exit()
         x = self.model.patch_embed(x)
         cls_tokens = self.model.cls_token.expand(x.shape[0], -1, -1)  # 클래스 토큰 추가
         x = torch.cat((cls_tokens, x), dim=1)
@@ -47,7 +49,7 @@ class Vpt_ViT(nn.Module):
         x = self.model.pos_drop(x)
 
         for idx, block in enumerate(self.model.blocks):
-            x = self.prompt_embedding.prepend_prompt(x, idx)
+            x = self.prompt_embedding.prepend_prompt(x, idx) # prompt_embedding을 통해서 
             x = block(x)
 
         x = self.model.norm(x)  # 최종 레이어 정규화
