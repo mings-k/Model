@@ -39,15 +39,14 @@ class Vpt_ViT(nn.Module):
 
         #timm을 이용한 pretrained_model 적용
         self.model = timm.create_model(pretrained_model, pretrained = True, img_size = img_size, patch_size = patch_size, num_classes = num_classes)
+        self.model.cls_token.requires_grad = False
+        self.model.pos_embed.requires_grad = False
+        for param in self.model.patch_embed.proj.parameters():
+            param.requires_grad = False
     
     def forward(self, x):
-        sys.exit()
-        x = self.model.patch_embed(x)
-        cls_tokens = self.model.cls_token.expand(x.shape[0], -1, -1)  # 클래스 토큰 추가
-        x = torch.cat((cls_tokens, x), dim=1)
-        x = x + self.model.pos_embed 
-        x = self.model.pos_drop(x)
-
+        # 논문과 똑같이 적용하기 위해 
+        x = self.model.forward_features(x) 
         for idx, block in enumerate(self.model.blocks):
             x = self.prompt_embedding.prepend_prompt(x, idx) # prompt_embedding을 통해서 
             x = block(x)
