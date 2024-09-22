@@ -39,6 +39,8 @@ class Vpt_ViT(nn.Module):
 
         #timm을 이용한 pretrained_model 적용
         self.model = timm.create_model(pretrained_model, pretrained = True, img_size = img_size, patch_size = patch_size, num_classes = num_classes)
+        
+        # Pretrain된 모델의 입력 토큰에 대한 가중치 Update를 False로 지정
         self.model.cls_token.requires_grad = False
         self.model.pos_embed.requires_grad = False
         for param in self.model.patch_embed.proj.parameters():

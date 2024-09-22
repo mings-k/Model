@@ -98,7 +98,7 @@ def train(model, train_loader, test_loader, criterion, optimizer, total_epochs, 
         # update
         if val_acc > best_acc:
             best_acc = val_acc
-            torch.save(model.state_dict(), f"results/best.pt")
+            torch.save(model.state_dict(), f"VPT/results/best.pt")
             print(f"{epoch} is the Best accuracy!")
 
     print(f'Epoch {epoch+1}/{total_epochs}, LR: {last_lr}/nLoss: {epoch_loss:.4f}, Accuracy: {epoch_acc:.2f}%')
@@ -170,7 +170,6 @@ if __name__ == '__main__':
 
     print_layer_trainable_status(model)
     
-
     # Parameter 출력
     params = sum(p.numel() for p in model.parameters())
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
