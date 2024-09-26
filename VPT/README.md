@@ -50,3 +50,8 @@ Embed Layer를 거치기 전 Pixel level에 적용하는 Prepend-pixel
 
 
 Meta의 논문을 보면 실험을 정말 알차게 한다는 생각을 많이 하게 되는 것 같습니다. 읽는 사람이 원하는 정보를 포함한 실험 내용을 잘 담는 것을 보며 많이 배우게 되는 것 같습니다!! 
+
+추가적으로 VPT 학습 시 CLS & Position embedding에 대한 학습 유무에 따른 정확성 및 parameter 결과입니다
+![alt text](git_image/image_acc.png)
+
+생각보다 Position embedding의 학습 유무가 결과에 큰 영향을 줘서 깜짝 놀랐습니다. 파라미터 대비 정확성으로 볼때 Position embedding은 해주는게 좋을 것 같습니다.
